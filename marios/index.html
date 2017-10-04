@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.css' rel='stylesheet' />
+
+    <script>
+        mapboxgl.accessToken =
+            'pk.eyJ1IjoiYW5jaWx3ZWVrZXMiLCJhIjoiY2l3a2l0NTkwMDA2OTJ0cDYzZW1uN2ZuciJ9.0iNOPZ_Tybnvn07wiWiTgw';
+        // This adds the map to your page
+        let map = new mapboxgl.Map({
+            // container id specified in the HTML
+            container: 'map',
+            // style URL
+            style: 'mapbox://styles/mapbox/light-v9',
+            // initial position in [lon, lat] format
+            center: [-61.114084, 10.609671],
+            // initial zoom
+            zoom: 14
+        });
+
+        let stores = 'marios.json';
+        // let stores = {
+        //     marios.json
+        // };
+
+        map.on('load', function(e) {
+            // Add the data to your map as a layer
+            map.addLayer({
+                id: 'locations',
+                type: 'symbol',
+                // Add a GeoJSON source containing place coordinates and information.
+                source: {
+                    type: 'geojson',
+                    data: stores
+                },
+                layout: {
+                    'icon-image': 'restaurant-15',
+                    'icon-allow-overlap': true,
+                }
+            });
+        });
+    </script>
+    <style>
+        body {
+            background: #404040;
+            color: #f8f8f8;
+            font: 500 20px/26px 'Helvetica Neue', Helvetica, Arial, Sans-serif;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .sidebar {
+            position: absolute;
+            width: 33.3333%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            border-right: 1px solid rgba(0, 0, 0, 0.25);
+        }
+        
+        .map {
+            border-left: 1px solid #fff;
+            position: absolute;
+            left: 33.3333%;
+            width: 66.6666%;
+            top: 0;
+            bottom: 0;
+        }
+        
+        .pad2 {
+            padding: 20px;
+            /* -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box; */
+        }
+        
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        
+        h1 {
+            font-size: 22px;
+            margin: 0;
+            font-weight: 400;
+            line-height: 20px;
+            padding: 20px 20px;
+        }
+        
+        a {
+            color: #404040;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            color: #101010;
+        }
+        
+        .heading {
+            background: #fff;
+            border-bottom: 1px solid #eee;
+            height: 60px;
+            line-height: 60px;
+            padding: 0 10px;
+        }
+        
+        .listings {
+            height: 100%;
+            overflow: auto;
+            padding-bottom: 60px;
+        }
+        
+        .listings .item {
+            display: block;
+            border-bottom: 1px solid #eee;
+            padding: 10px;
+            text-decoration: none;
+        }
+        
+        .listings .item:last-child {
+            border-bottom: none;
+        }
+        
+        .listings .item.active .title,
+        .listings .item .title:hover {
+            color: #C63F3F;
+        }
+        
+        .listings .item.active {
+            background-color: #f8f8f8;
+        }
+        
+         ::-webkit-scrollbar {
+            width: 3px;
+            height: 3px;
+            border-left: 0;
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+         ::-webkit-scrollbar-thumb {
+            background: #850016;
+            border-radius: 0;
+        }
+        
+        .clearfix {
+            display: block;
+        }
+        
+        .clearfix::after {
+            content: '.';
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+    </style>
+    <title>Store Locator - Mario's Pizza</title>
+</head>
+
+<body>
+    <div class='sidebar pad2'>
+        <div class="heading">
+            <h1>Our Locations</h1>
+        </div>
+        <div id="listings" class="listings"></div>
+    </div>
+    <div id='map' class='map pad2'>Map</div>
+
+
+</body>
+
+</html>
