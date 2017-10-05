@@ -5,135 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <link rel="stylesheet" href="mapbox-gl.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet'>
 
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.css' rel='stylesheet' />
+    <link rel="canonical" href="index.html">
 
-    <script>
-        if (!("remove" in Element.prototype)) {
-            Element.prototype.remove = function() {
-                if (this.parentNode) {
-                    this.parentNode.removeChild(this);
-                }
-            };
-        }
-
-        mapboxgl.accessToken =
-            'pk.eyJ1IjoiYW5jaWx3ZWVrZXMiLCJhIjoiY2l3a2l0NTkwMDA2OTJ0cDYzZW1uN2ZuciJ9.0iNOPZ_Tybnvn07wiWiTgw';
-        // This adds the map to your page
-        let map = new mapboxgl.Map({
-            // container id specified in the HTML
-            container: 'map',
-            // style URL
-            style: 'mapbox://styles/mapbox/light-v9',
-            // initial position in [lon, lat] format
-            center: [-61.114084, 10.609671],
-            // initial zoom
-            zoom: 14
-        });
-
-        let stores = 'marios.json';
-        // let stores = {
-        //     marios.json
-        // };
-
-        map.on('load', function(e) {
-            // Add the data to your map as a layer
-            map.addLayer({
-                id: 'locations',
-                type: 'symbol',
-                // Add a GeoJSON source containing place coordinates and information.
-                source: {
-                    type: 'geojson',
-                    data: stores
-                },
-                layout: {
-                    'icon-image': 'restaurant-15',
-                    'icon-allow-overlap': true,
-                }
-            });
-
-            buildLocationList(stores);
-        });
-
-        function buildLocationList(data) {
-            for (let i = 0; i < data.features.length; i++) {
-                var currentFeature = data.features[i];
-                var prop = currentFeature.properties;
-                var listings = document.getElementById('listings');
-                var listing = listings.appendChild(document.createElement('div'));
-                listing.className = 'item';
-                listing.id = "listing-" + i;
-
-                var link = listing.appendChild(document.createElement('a'));
-                link.href = "#";
-                link.className = "title";
-                link.dataPosition = i;
-                link.innerHTML = prop.address;
-
-                var details = listing.appendChild(document.createElement('div'));
-                details.innerHTML = prop.city;
-                if (prop.phone) {
-                    details.innerHTML += " &middot; " + prop.phoneFormatted;
-                }
-            }
-        }
-
-        function flyToStore(currentFeature) {
-            map.flyTo({
-                center: currentFeature.geometry.coordinates,
-                zoom: 15
-            });
-        }
-
-        function createPopUp(currentFeature) {
-            let popUps = document.getElementsByClassName("mapboxgl-popup");
-
-            if (popUps[0]) popUps[0].remove();
-
-            let popup = new mapboxgl.Popup({
-                    closeOnClick: false
-                })
-                .setLngLat(currentFeature.geometry.coordinates)
-                .setHTML("<h3>Mario's</h3>" +
-                    "<h4>" + currentFeature.properties.address + "</h4>")
-                .addTo(map);
-        }
-    </script>
+    <meta name="theme-color" content="#850012">
     <style>
         body {
-            background: #404040;
-            color: #f8f8f8;
-            font: 500 20px/26px 'Helvetica Neue', Helvetica, Arial, Sans-serif;
+            color: #404040;
+            font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
             margin: 0;
             padding: 0;
             -webkit-font-smoothing: antialiased;
-        }
-        
-        .sidebar {
-            position: absolute;
-            width: 33.3333%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            overflow: hidden;
-            border-right: 1px solid rgba(0, 0, 0, 0.25);
-        }
-        
-        .map {
-            border-left: 1px solid #fff;
-            position: absolute;
-            left: 33.3333%;
-            width: 66.6666%;
-            top: 0;
-            bottom: 0;
-        }
-        
-        .pad2 {
-            padding: 20px;
-            /* -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box; */
         }
         
         * {
@@ -147,7 +32,7 @@
             margin: 0;
             font-weight: 400;
             line-height: 20px;
-            padding: 20px 20px;
+            padding: 20px 2px;
         }
         
         a {
@@ -157,6 +42,28 @@
         
         a:hover {
             color: #101010;
+        }
+        
+        .sidebar {
+            position: absolute;
+            width: 33.3333%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            border-right: 1px solid rgba(0, 0, 0, 0.25);
+        }
+        
+        .pad2 {
+            padding: 20px;
+        }
+        
+        .map {
+            position: absolute;
+            left: 33.3333%;
+            width: 66.6666%;
+            top: 0;
+            bottom: 0;
         }
         
         .heading {
@@ -184,9 +91,19 @@
             border-bottom: none;
         }
         
+        .listings .item .title {
+            display: block;
+            color: #850012;
+            font-weight: 700;
+        }
+        
+        .listings .item .title small {
+            font-weight: 400;
+        }
+        
         .listings .item.active .title,
         .listings .item .title:hover {
-            color: #C63F3F;
+            color: #C63F51;
         }
         
         .listings .item.active {
@@ -200,8 +117,12 @@
             background: rgba(0, 0, 0, 0.1);
         }
         
+         ::-webkit-scrollbar-track {
+            background: none;
+        }
+        
          ::-webkit-scrollbar-thumb {
-            background: #850016;
+            background: #85000B;
             border-radius: 0;
         }
         
@@ -216,57 +137,23 @@
             clear: both;
             visibility: hidden;
         }
-        /* Marker tweaks */
-        
-        .mapboxgl-popup-close-button {
-            display: none;
-        }
-        
-        .mapboxgl-popup-content {
-            font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
-            padding: 0;
-            width: 180px;
-        }
-        
-        .mapboxgl-popup-content-wrapper {
-            padding: 1%;
-        }
-        
-        .mapboxgl-popup-content h3 {
-            background: #91c949;
-            color: #fff;
-            margin: 0;
-            display: block;
-            padding: 10px;
-            border-radius: 3px 3px 0 0;
-            font-weight: 700;
-            margin-top: -15px;
-        }
-        
-        .mapboxgl-popup-content h4 {
-            margin: 0;
-            display: block;
-            padding: 10px;
-            font-weight: 400;
-        }
-        
-        .mapboxgl-popup-content div {
-            padding: 10px;
-        }
-        
-        .mapboxgl-container .leaflet-marker-icon {
+
+        .marker {
+            border: none;
             cursor: pointer;
+            height: 30px;
+            width: 30px;
+            background-image: url(pizza-30.png);
+            background-color: rgba(0, 0, 0, 0);
         }
-        
-        .mapboxgl-popup-anchor-top>.mapboxgl-popup-content {
-            margin-top: 15px;
-        }
-        
-        .mapboxgl-popup-anchor-top>.mapboxgl-popup-tip {
-            border-bottom-color: #91c949;
+
+        .mapboxgl-popup {
+            padding-bottom: 50px;
         }
     </style>
     <title>Store Locator - Mario's Pizza</title>
+
+    <link rel="manifest" href="manifest.json">
 </head>
 
 <body>
@@ -276,9 +163,214 @@
         </div>
         <div id="listings" class="listings"></div>
     </div>
-    <div id='map' class='map pad2'>Map</div>
+    <div id="map" class="map pad2">Map</div>
 
+    <script src="mapbox-gl.js"></script>
+    <!-- <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.js'></script>   -->
+    <script async>
+        if (!("remove" in Element.prototype)) {
+            Element.prototype.remove = function() {
+                if (this.parentNode) {
+                    this.parentNode.removeChild(this);
+                }
+            };
+        }
 
+        mapboxgl.accessToken = "pk.eyJ1IjoiYW5jaWx3ZWVrZXMiLCJhIjoiY2o4ZGtsNjJ5MHBubDJxcDd3aXc3ZmgweiJ9.2w9eYxAOsuJlXLDo_XNF6w";
+        // This adds the map to your page
+        let map = new mapboxgl.Map({
+            // container id specified in the HTML
+            container: "map",
+            // style URL
+            style: "mapbox://styles/mapbox/light-v9",
+            // style: "mapbox://styles/ancilweekes/cj8dm55ov98n22rn5h76avzu1",
+            // initial position in [lon, lat] format
+            center: [-61.414084, 10.369671],
+            // initial zoom
+            zoom: 8.15
+        });
+
+        // let stores = "features.geojson";
+        let stores = {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            -61.4021760,
+                            10.5143410
+                        ]
+                },
+                "properties": {
+                    "phoneFormatted": "(868) 234-7336",
+                    "phone": "8682347336",
+                    "address": "Southern Main Road, Montrose",
+                    "city": "Montrose",
+                    "country": "Trinidad and Tobago",
+                    "countryCode": "TT"
+                }
+            }]
+        };
+
+        // stores.features.forEach(function(marker) {
+        //     let el = document.createElement("div");
+        //     el.className = "marker";
+
+        //     new mapboxgl.Marker(el, { offset: [0, -23] })
+        //     .setLngLat(marker.geometry.coordinates)
+        //     .addTo(map);
+
+        //     el.addEventListener("click", function(e){
+        //         let activeItem = document.getElementsByClassName("active");
+
+        //         flyToStore(marker);
+        //         createPopUp(marker);
+
+        //         e.stopPropagation();
+        //         if (activeItem[0]) {
+        //             activeItem[0].classList.remove("active");
+        //         }
+
+        //         let listing = document.getElementById("listing-" + i);
+        //         console.log(listing);
+        //         listing.classList.add("active");
+        //     });
+        // });
+
+        map.on("load", function(e) {
+            // Add the data to your map as a layer
+            map.addSource("places", {
+                type: "geojson",
+                data: stores
+            });
+
+            buildLocationList(stores);
+        });
+
+        // map.on("click", function(e) {
+        //     let features = map.queryRenderedFeatures(e.point, {
+        //         layers: ["locations"]
+        //     });
+
+        //     if (features.length) {
+        //         let clickedPoint = features[0];
+
+        //         flyToStore(clickedPoint);
+        //         createPopUp(clickedPoint);
+
+        //         let activeItem = document.getElementsByClassName("active");
+        //         if (activeItem[0]) {
+        //             activeItem[0].classList.remove("active");
+        //         }
+
+        //         let selectedFeature = clickedPoint.properties.address;
+
+        //         for (let i = 0; i < stores.features.length; i++) {
+        //             if (stores.features[i].properties.address === selectedFeature) {
+        //                 selectedFeatureIndex = i;
+        //             }
+
+        //         }
+
+        //         let listing = document.getElementById("listing-" +
+        //             selectedFeatureIndex);
+        //         listing.classList.add("active");
+        //     }
+        // });
+
+        function buildLocationList(data) {
+            for (let i = 0; i < data.features.length; i++) {
+                let currentFeature = data.features[i];
+                let prop = currentFeature.properties;
+                let listings = document.getElementById('listings');
+                let listing = listings.appendChild(document.createElement('div'));
+                listing.className = 'item';
+                listing.id = "listing-" + i;
+
+                let link = listing.appendChild(document.createElement('a'));
+                link.href = "#";
+                link.className = "title";
+                link.dataPosition = i;
+                link.innerHTML = prop.address;
+
+                let details = listing.appendChild(document.createElement('div'));
+                details.innerHTML = prop.city;
+                if (prop.phone) {
+                    details.innerHTML += " &middot; " + prop.phoneFormatted;
+                }
+
+                link.addEventListener("click", function(e) {
+                    let clickedListing = data.features[this.dataPosition];
+
+                    flyToStore(clickedListing);
+                    createPopUp(clickedListing);
+
+                    let activeItem = document.getElementsByClassName("active");
+                    if (activeItem[0]) {
+                        activeItem[0].classList.remove("active");
+                    }
+
+                    this.parentNode.classList.add("active");
+                });
+
+                stores.features.forEach(function(marker) {
+            let el = document.createElement("div");
+            el.className = "marker";
+
+            new mapboxgl.Marker(el, { offset: [0, -23] })
+            .setLngLat(marker.geometry.coordinates)
+            .addTo(map);
+
+            el.addEventListener("click", function(e){
+                let activeItem = document.getElementsByClassName("active");
+
+                flyToStore(marker);
+                createPopUp(marker);
+
+                e.stopPropagation();
+                if (activeItem[0]) {
+                    activeItem[0].classList.remove("active");
+                }
+
+                let listing = document.getElementById("listing-" + i);
+                // console.log(listing);
+                listing.classList.add("active");
+            });
+        });
+            }
+        }
+
+        function flyToStore(currentFeature) {
+            map.flyTo({
+                center: currentFeature.geometry.coordinates,
+                zoom: 15
+            });
+        }
+
+        function createPopUp(currentFeature) {
+            let popUps = document.getElementsByClassName("mapboxgl-popup");
+
+            if (popUps[0]) popUps[0].remove();
+
+            let popup = new mapboxgl.Popup({
+                    closeOnClick: false
+                })
+                .setLngLat(currentFeature.geometry.coordinates)
+                .setHTML("<h3>Mario's</h3>" +
+                    "<h4>" + currentFeature.properties.address + "</h4>")
+                .addTo(map);
+        }
+    </script>
+    <script>
+        if ("serviceWorker" in navigator){
+            navigator.serviceWorker
+            .register("/service-worker.js")
+            .then(function(reg){})
+            .catch(function(err){});
+        }
+    </script>
 </body>
 
 </html>

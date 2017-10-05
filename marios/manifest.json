@@ -1,0 +1,9 @@
+{
+    "name": "Mario's Pizza",
+    "short_name": "Mario's",
+    "theme_color": "#850012",
+    "background_color": "#850012",
+    "display": "fullscreen",
+    "scope": "/",
+    "start_url": "./?utm_source=web_app_manifest"
+  }
