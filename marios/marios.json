@@ -1,0 +1,319 @@
+{
+    "type": "FeatureCollection",
+    "features": [{
+        "geometry": {
+            "coordinates": [-61.4601160, 10.4222230],
+            "type": "Point"
+        },
+        "properties": {
+            "Google Maps URL": "http://maps.google.com/?cid=18068161915569083318",
+            "Location": {
+                "Address": "Church Street, Trinidad & Tobago",
+                "Business Name": "Mario's Pizza, Couva",
+                "Country Code": "TT",
+                "Geo Coordinates": {
+                    "Latitude": "10.4222230",
+                    "Longitude": "-61.4601160"
+                }
+            },
+            "Published": "2017-10-04T19:53:28Z",
+            "Title": "Mario's Pizza, Couva",
+            "Updated": "2017-10-04T19:53:28Z"
+        },
+        "type": "Feature"
+    }, {
+        "geometry": {
+            "coordinates": [-61.1278640, 10.5852550],
+            "type": "Point"
+        },
+        "properties": {
+            "Google Maps URL": "http://maps.google.com/?cid=13775463896733369562",
+            "Location": {
+                "Address": "Eastern Main Road, Sangre Grande, Trinidad & Tobago",
+                "Business Name": "Mario's Pizza, Sangre Grande",
+                "Country Code": "TT",
+                "Geo Coordinates": {
+                    "Latitude": "10.5852550",
+                    "Longitude": "-61.1278640"
+                }
+            },
+            "Published": "2017-10-04T19:53:20Z",
+            "Title": "Mario's Pizza, Sangre Grande",
+            "Updated": "2017-10-04T19:53:20Z"
+        },
+        "type": "Feature"
+    }, {
+        "geometry": {
+            "coordinates": [-61.5545481, 10.6920113],
+            "type": "Point"
+        },
+        "properties": {
+            "Google Maps URL": "http://maps.google.com/?cid=9222015216352456521",
+            "Location": {
+                "Address": "7-11, Diego Martin Main Road, Diego Martin, Trinidad & Tobago",
+                "Business Name": "Mario's Pizza",
+                "Country Code": "TT",
+                "Geo Coordinates": {
+                    "Latitude": "10.6920113",
+                    "Longitude": "-61.5545481"
+                }
+            },
+            "Published": "2017-10-04T19:52:36Z",
+            "Title": "Mario's Pizza",
+            "Updated": "2017-10-04T19:52:36Z"
+        },
+        "type": "Feature"
+    }, {
+        "geometry": {
+            "coordinates": [-61.5529058, 10.6778854],
+            "type": "Point"
+        },
+        "properties": {
+            "Google Maps URL": "http://maps.google.com/?cid=10829604316825847835",
+            "Location": {
+                "Address": "West Mall, West Mall Parking, Diego Martin, Trinidad & Tobago",
+                "Business Name": "Mario's Pizza",
+                "Country Code": "TT",
+                "Geo Coordinates": {
+                    "Latitude": "10.6778854",
+                    "Longitude": "-61.5529058"
+                }
+            },
+            "Published": "2017-10-04T19:52:27Z",
+            "Title": "Mario's Pizza",
+            "Updated": "2017-10-04T19:52:27Z"
+        },
+        "type": "Feature"
+    }, {
+        "geometry": {
+            "coordinates": [-61.5169460, 10.6606080],
+            "type": "Point"
+        },
+        "properties": {
+            "Google Maps URL": "http://maps.google.com/?cid=12613569329425974271",
+            "Location": {
+                "Address": "Cipriani Boulevard, Port of Spain, Trinidad & Tobago",
+                "Business Name": "Mario's Pizza",
+                "Country Code": "TT",
+                "Geo Coordinates": {
+                    "Latitude": "10.6606080",
+                    "Longitude": "-61.5169460"
+                }
+            },
+            "Published": "2017-10-04T19:52:22Z",
+            "Title": "Mario's Pizza",
+            "Updated": "2017-10-04T19:52:22Z"
+        },
+        "type": "Feature"
+    }, {
+        "geometry": {
+            "coordinates": [-61.5214000, 10.6762310],
+            "type": "Point"
+        },
+        "properties": {
+            "Google Maps URL": "http://maps.google.com/?cid=10419887167941340976",
+            "Location": {
+                "Address": "Saddle Road, Port of Spain, Trinidad & Tobago",
+                "Business Name": "Mario's Pizza",
+                "Country Code": "TT",
+                "Geo Coordinates": {
+                    "Latitude": "10.6762310",
+                    "Longitude": "-61.5214000"
+                }
+            },
+            "Published": "2017-10-04T19:52:18Z",
+            "Title": "Mario's Pizza",
+            "Updated": "2017-10-04T19:52:18Z"
+        },
+        "type": "Feature"
+    }, {
+        "geometry": {
+            "coordinates": [-61.5092160, 10.6495090],
+            "type": "Point"
+        },
+        "properties": {
+            "Google Maps URL": "http://maps.google.com/?cid=8964184620714742118",
+            "Location": {
+                "Address": "Independence Square South, Port of Spain, Trinidad & Tobago",
+                "Business Name": "Mario's Pizza",
+                "Country Code": "TT",
+                "Geo Coordinates": {
+                    "Latitude": "10.6495090",
+                    "Longitude": "-61.5092160"
+                }
+            },
+            "Published": "2017-10-04T19:52:14Z",
+            "Title": "Mario's Pizza",
+            "Updated": "2017-10-04T19:52:14Z"
+        },
+        "type": "Feature"
+    }, {
+        "geometry": {
+            "coordinates": [-61.4021760, 10.5143410],
+            "type": "Point"
+        },
+        "properties": {
+            "Google Maps URL": "http://maps.google.com/?cid=17741250105169349085",
+            "Location": {
+                "Address": "Southern Main Road, Montrose, Trinidad & Tobago",
+                "Business Name": "Mario's",
+                "Country Code": "TT",
+                "Geo Coordinates": {
+                    "Latitude": "10.5143410",
+                    "Longitude": "-61.4021760"
+                }
+            },
+            "Published": "2017-10-04T19:52:06Z",
+            "Title": "Mario's",
+            "Updated": "2017-10-04T19:52:06Z"
+        },
+        "type": "Feature"
+    }, {
+        "geometry": {
+            "coordinates": [-61.4505783, 10.6502193],
+            "type": "Point"
+        },
+        "properties": {
+            "Google Maps URL": "http://maps.google.com/?cid=12149006399257913769",
+            "Location": {
+                "Address": "Eastern Main Road, San Juan, Trinidad & Tobago",
+                "Business Name": "Mario's Pizza",
+                "Country Code": "TT",
+                "Geo Coordinates": {
+                    "Latitude": "10.6502193",
+                    "Longitude": "-61.4505783"
+                }
+            },
+            "Published": "2017-10-04T19:51:54Z",
+            "Title": "Mario's Pizza",
+            "Updated": "2017-10-04T19:51:54Z"
+        },
+        "type": "Feature"
+    }, {
+        "geometry": {
+            "coordinates": [-61.4185420, 10.6330140],
+            "type": "Point"
+        },
+        "properties": {
+            "Google Maps URL": "http://maps.google.com/?cid=217719552813227472",
+            "Location": {
+                "Address": "Morequito Avenue, Trinidad & Tobago",
+                "Business Name": "Mario's Pizza",
+                "Country Code": "TT",
+                "Geo Coordinates": {
+                    "Latitude": "10.6330140",
+                    "Longitude": "-61.4185420"
+                }
+            },
+            "Published": "2017-10-04T19:51:50Z",
+            "Title": "Mario's Pizza",
+            "Updated": "2017-10-04T19:51:50Z"
+        },
+        "type": "Feature"
+    }, {
+        "geometry": {
+            "coordinates": [-61.4042780, 10.6480690],
+            "type": "Point"
+        },
+        "properties": {
+            "Google Maps URL": "http://maps.google.com/?cid=1705136402364541088",
+            "Location": {
+                "Address": "Eastern Main Road, Trinidad & Tobago",
+                "Business Name": "Mario's Pizza, St Augustine",
+                "Country Code": "TT",
+                "Geo Coordinates": {
+                    "Latitude": "10.6480690",
+                    "Longitude": "-61.4042780"
+                }
+            },
+            "Published": "2017-10-04T19:51:16Z",
+            "Title": "Mario's Pizza, St Augustine",
+            "Updated": "2017-10-04T19:51:16Z"
+        },
+        "type": "Feature"
+    }, {
+        "geometry": {
+            "coordinates": [-61.3982669, 10.6390032],
+            "type": "Point"
+        },
+        "properties": {
+            "Google Maps URL": "http://maps.google.com/?cid=16504645654634824660",
+            "Location": {
+                "Address": "Trinidad & Tobago",
+                "Business Name": "Mario's Pizza, UWI St Augustine",
+                "Country Code": "TT",
+                "Geo Coordinates": {
+                    "Latitude": "10.6390032",
+                    "Longitude": "-61.3982669"
+                }
+            },
+            "Published": "2017-10-04T19:50:58Z",
+            "Title": "Mario's Pizza, UWI St Augustine",
+            "Updated": "2017-10-04T19:50:58Z"
+        },
+        "type": "Feature"
+    }, {
+        "geometry": {
+            "coordinates": [-61.3724391, 10.6460632],
+            "type": "Point"
+        },
+        "properties": {
+            "Google Maps URL": "http://maps.google.com/?cid=8402450277675255400",
+            "Location": {
+                "Address": "Eastern Main Road, El Dorado, Trinidad & Tobago",
+                "Business Name": "Mario's Pizza, El Dorado",
+                "Country Code": "TT",
+                "Geo Coordinates": {
+                    "Latitude": "10.6460632",
+                    "Longitude": "-61.3724391"
+                }
+            },
+            "Published": "2017-10-04T19:50:54Z",
+            "Title": "Mario's Pizza, El Dorado",
+            "Updated": "2017-10-04T19:50:54Z"
+        },
+        "type": "Feature"
+    }, {
+        "geometry": {
+            "coordinates": [-61.2902087, 10.6176922],
+            "type": "Point"
+        },
+        "properties": {
+            "Google Maps URL": "http://maps.google.com/?cid=1159406856197224507",
+            "Location": {
+                "Address": "Arima, Trinidad & Tobago",
+                "Business Name": "Mario's Pizza, Arima - O'meara Road",
+                "Country Code": "TT",
+                "Geo Coordinates": {
+                    "Latitude": "10.6176922",
+                    "Longitude": "-61.2902087"
+                }
+            },
+            "Published": "2017-10-04T19:50:47Z",
+            "Title": "Mario's Pizza, Arima - O'meara Road",
+            "Updated": "2017-10-04T19:50:47Z"
+        },
+        "type": "Feature"
+    }, {
+        "geometry": {
+            "coordinates": [-61.3530659, 10.6272041],
+            "type": "Point"
+        },
+        "properties": {
+            "Google Maps URL": "http://maps.google.com/?cid=11450740740432724405",
+            "Location": {
+                "Address": "Trinidad & Tobago",
+                "Business Name": "Mario's Pizza Trincity",
+                "Country Code": "TT",
+                "Geo Coordinates": {
+                    "Latitude": "10.6272041",
+                    "Longitude": "-61.3530659"
+                }
+            },
+            "Published": "2017-10-04T19:48:39Z",
+            "Title": "Mario's Pizza Trincity",
+            "Updated": "2017-10-04T19:48:39Z"
+        },
+        "type": "Feature"
+    }]
+}

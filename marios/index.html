@@ -1,0 +1,421 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="X-UA-Compatible" content="ie=edge"><link rel="stylesheet" href="mapbox-gl.css"><link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet"><link rel="canonical" href="index.html"><meta name="theme-color" content="#850012"><style>body,h1{margin:0}a,body{color:#404040}.map,.sidebar{position:absolute;top:0}.heading,.listings .item{border-bottom:1px solid #eee}.listings .item,a{text-decoration:none}body{font:400 15px/22px 'Source Sans Pro','Helvetica Neue',Sans-serif;padding:0;-webkit-font-smoothing:antialiased}*{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}h1{font-size:22px;font-weight:400;line-height:20px;padding:20px 2px}a:hover{color:#101010}.sidebar{width:33.3333%;height:100%;left:0;overflow:hidden;border-right:1px solid rgba(0,0,0,.25)}.pad2{padding:20px}.map{left:33.3333%;width:66.6666%;bottom:0}.heading{background:#fff;height:60px;line-height:60px;padding:0 10px}.listings{height:100%;overflow:auto;padding-bottom:60px}.listings .item{display:block;padding:10px}.listings .item:last-child{border-bottom:none}.listings .item .title{display:block;color:#850012;font-weight:700}.listings .item .title small{font-weight:400}.listings .item .title:hover,.listings .item.active .title{color:#C63F51}.listings .item.active{background-color:#f8f8f8}::-webkit-scrollbar{width:3px;height:3px;border-left:0;background:rgba(0,0,0,.1)}::-webkit-scrollbar-track{background:0 0}::-webkit-scrollbar-thumb{background:#85000B;border-radius:0}.clearfix{display:block}.clearfix::after{content:'.';display:block;height:0;clear:both;visibility:hidden}.marker{border:none;cursor:pointer;height:30px;width:30px;background-image:url(pizza-30.png);background-color:rgba(0,0,0,0)}.mapboxgl-popup{padding-bottom:50px}</style><title>Store Locator - Mario's Pizza</title><link rel="manifest" href="manifest.json"></head><body><div class="sidebar pad2"><div class="heading"><h1>Our Locations</h1></div><div id="listings" class="listings"></div></div><div id="map" class="map pad2">Map</div><script src="mapbox-gl.js"></script><!-- <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.js'></script>   --><script async>if (!("remove" in Element.prototype)) {
+            Element.prototype.remove = function() {
+                if (this.parentNode) {
+                    this.parentNode.removeChild(this);
+                }
+            };
+        }
+
+        mapboxgl.accessToken =
+            "pk.eyJ1IjoiYW5jaWx3ZWVrZXMiLCJhIjoiY2o4ZGtsNjJ5MHBubDJxcDd3aXc3ZmgweiJ9.2w9eYxAOsuJlXLDo_XNF6w";
+        // This adds the map to your page
+        let map = new mapboxgl.Map({
+            // container id specified in the HTML
+            container: "map",
+            // style URL
+            style: "mapbox://styles/mapbox/light-v9",
+            // style: "mapbox://styles/ancilweekes/cj8dm55ov98n22rn5h76avzu1",
+            // initial position in [lon, lat] format
+            center: [-61.414084, 10.369671],
+            // initial zoom
+            zoom: 8.15,
+            scrollZoom: false
+        });
+
+        let stores = {
+            "type": "FeatureCollection",
+            "features": [{
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-61.460116, 10.422223]
+                },
+                "properties": {
+                    "phoneFormatted": "(868) 225-1944",
+                    "phone": 8682251944,
+                    "address": "Southern Main Road",
+                    "city": "Couva",
+                    "country": "Trinidad and Tobago",
+                    "countryCode": "TT"
+                }
+            }, {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-61.127864, 10.585255]
+                },
+                "properties": {
+                    "phoneFormatted": "(868) 225-1948",
+                    "phone": 8682251948,
+                    "address": "Eastern Main Road",
+                    "city": "Sangre Grande",
+                    "country": "Trinidad and Tobago",
+                    "countryCode": "TT"
+                }
+            }, {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-61.5545481, 10.6920113]
+                },
+                "properties": {
+                    "phoneFormatted": "(868) 225-1961",
+                    "phone": 8682251961,
+                    "address": "Diego Martin Main Road",
+                    "city": "Diego Martin",
+                    "country": "Trinidad and Tobago",
+                    "countryCode": "TT"
+                }
+            }, {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-61.5529058, 10.6778854]
+                },
+                "properties": {
+                    "phoneFormatted": "(868) 225-1960",
+                    "phone": 8682251960,
+                    "address": "Western Main Road",
+                    "city": "Westmoorings",
+                    "country": "Trinidad and Tobago",
+                    "countryCode": "TT"
+                }
+            }, {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-61.516946, 10.660608]
+                },
+                "properties": {
+                    "phoneFormatted": "(868) 225-1958",
+                    "phone": 8682251958,
+                    "address": "Cipriani Boulevard",
+                    "city": "Port of Spain",
+                    "country": "Trinidad and Tobago",
+                    "countryCode": "TT"
+                }
+            }, {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-61.524227, 10.6755615]
+                },
+                "properties": {
+                    "phoneFormatted": "(868) 225-1959",
+                    "phone": 8682251959,
+                    "address": "Saddle Road",
+                    "city": "Maraval",
+                    "country": "Trinidad and Tobago",
+                    "countryCode": "TT"
+                }
+            }, {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-61.509216, 10.649509]
+                },
+                "properties": {
+                    "phoneFormatted": "(868) 225-1956",
+                    "phone": 8682251956,
+                    "address": "Independence Square South",
+                    "city": "Port of Spain",
+                    "country": "Trinidad and Tobago",
+                    "countryCode": "TT"
+                }
+            }, {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-61.402176, 10.514341]
+                },
+                "properties": {
+                    "phoneFormatted": "(868) 225-1947",
+                    "phone": 8682251947,
+                    "address": "Southern Main Road",
+                    "city": "Montrose",
+                    "country": "Trinidad and Tobago",
+                    "countryCode": "TT"
+                }
+            }, {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-61.4505783, 10.6502193]
+                },
+                "properties": {
+                    "phoneFormatted": "(868) 225-1955",
+                    "phone": 8682251955,
+                    "address": "Eastern Main Road",
+                    "city": "San Juan",
+                    "country": "Trinidad and Tobago",
+                    "countryCode": "TT"
+                }
+            }, {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-61.418542, 10.633014]
+                },
+                "properties": {
+                    "phoneFormatted": "(868) 225-1954",
+                    "phone": 8682251954,
+                    "address": "Valpark Shopping Plaza",
+                    "city": "Valsayn",
+                    "country": "Trinidad and Tobago",
+                    "countryCode": "TT"
+                }
+            }, {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-61.404278, 10.648069]
+                },
+                "properties": {
+                    "phoneFormatted": "(868) 225-1953",
+                    "phone": 8682251953,
+                    "address": "Eastern Main Road",
+                    "city": "St Augustine",
+                    "country": "Trinidad and Tobago",
+                    "countryCode": "TT"
+                }
+            }, {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-61.3982669, 10.6390032]
+                },
+                "properties": {
+                    "phoneFormatted": "(868) 225-1952",
+                    "phone": 8682251952,
+                    "address": "University of the West Indies",
+                    "city": "St Augustine",
+                    "country": "Trinidad and Tobago",
+                    "countryCode": "TT"
+                }
+            }, {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-61.3724391, 10.6460632]
+                },
+                "properties": {
+                    "phoneFormatted": "(868) 225-1951",
+                    "phone": 8682251951,
+                    "address": "Eastern Main Road",
+                    "city": "El Dorado",
+                    "country": "Trinidad and Tobago",
+                    "countryCode": "TT"
+                }
+            }, {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-61.2924027, 10.6176975]
+                },
+                "properties": {
+                    "phoneFormatted": "(868) 225-1949",
+                    "phone": 8682251949,
+                    "address": "O'Meara Road",
+                    "city": "Arima",
+                    "country": "Trinidad and Tobago",
+                    "countryCode": "TT"
+                }
+            }, {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-61.3530659, 10.6272041]
+                },
+                "properties": {
+                    "phoneFormatted": "(868) 225-1950",
+                    "phone": 8682251950,
+                    "address": "Trincity Mall",
+                    "city": "Trincity",
+                    "country": "Trinidad and Tobago",
+                    "countryCode": "TT"
+                }
+            }, {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-61.4108854, 10.532962]
+                },
+                "properties": {
+                    "phoneFormatted": "(868) 225-1962",
+                    "phone": 8682251962,
+                    "address": "Narsaloo Ramaya Marg Road",
+                    "city": "Chaguanas",
+                    "country": "Trinidad and Tobago",
+                    "countryCode": "TT"
+                }
+            }, {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-61.4095255, 10.5122528]
+                },
+                "properties": {
+                    "phoneFormatted": "(868) 225-1945",
+                    "phone": 8682251945,
+                    "address": "Mid Centre Mall",
+                    "city": "Chaguanas",
+                    "country": "Trinidad and Tobago",
+                    "countryCode": "TT"
+                }
+            }, {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-61.410019, 10.5138274]
+                },
+                "properties": {
+                    "phoneFormatted": "(868) 225-1946",
+                    "phone": 8682251946,
+                    "address": "Eleanor Road",
+                    "city": "Chaguanas",
+                    "country": "Trinidad and Tobago",
+                    "countryCode": "TT"
+                }
+            }, {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-61.508911, 10.6481482]
+                },
+                "properties": {
+                    "phoneFormatted": "(868) 225-1957",
+                    "phone": 8682251957,
+                    "address": "South Quay",
+                    "city": "Port of Spain",
+                    "country": "Trinidad and Tobago",
+                    "countryCode": "TT"
+                }
+            }, {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-61.432208, 10.3144312]
+                },
+                "properties": {
+                    "phoneFormatted": "(868) 225-1943",
+                    "phone": 8682251943,
+                    "address": "LP#5 Bonne Aventure Road",
+                    "city": "Gasparillo",
+                    "country": "Trinidad and Tobago",
+                    "countryCode": "TT"
+                }
+            }, {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-61.4481802, 10.3016586]
+                },
+                "properties": {
+                    "phoneFormatted": "(868) 225-1942",
+                    "phone": 8682251942,
+                    "address": "Gopaul Lands",
+                    "city": "Marabella",
+                    "country": "Trinidad and Tobago",
+                    "countryCode": "TT"
+                }
+            }]
+        };
+
+        map.on("load", function(e) {
+            // Add the data to your map as a layer
+            map.addSource(
+                "places", {
+                    type: "geojson",
+                    data: stores
+                });
+
+
+            buildLocationList(stores);
+        });
+
+        stores.features.forEach(function(marker, i) {
+            let el = document.createElement("div");
+            el.id = "marker-" + i;
+            el.className = "marker";
+
+            new mapboxgl.Marker(el, {
+                    offset: [0, -23]
+                })
+                .setLngLat(marker.geometry.coordinates)
+                .addTo(map);
+
+            el.addEventListener("click", function(e) {
+                flyToStore(marker);
+                createPopUp(marker);
+                let activeItem = document.getElementsByClassName("active");
+
+                e.stopPropagation();
+                if (activeItem[0]) {
+                    activeItem[0].classList.remove("active");
+                }
+
+                let listing = document.getElementById("listing-" + i);
+                listing.classList.add("active");
+            });
+        });
+
+        function buildLocationList(data) {
+            for (let i = 0; i < data.features.length; i++) {
+                let currentFeature = data.features[i];
+                let prop = currentFeature.properties;
+
+                let listings = document.getElementById("listings");
+                let listing = listings.appendChild(document.createElement("div"));
+                listing.className = "item";
+                listing.id = "listing-" + i;
+
+                let link = listing.appendChild(document.createElement("a"));
+                link.href = "#";
+                link.className = "title";
+                link.dataPosition = i;
+                link.innerHTML = prop.address;
+
+                let details = listing.appendChild(document.createElement("div"));
+                details.innerHTML = prop.city;
+                if (prop.phone) {
+                    details.innerHTML += " &middot; " + prop.phoneFormatted;
+                }
+
+                link.addEventListener("click", function(e) {
+                    let clickedListing = data.features[this.dataPosition];
+
+                    flyToStore(clickedListing);
+                    createPopUp(clickedListing);
+
+                    let activeItem = document.getElementsByClassName("active");
+
+                    if (activeItem[0]) {
+                        activeItem[0].classList.remove("active");
+                    }
+
+                    this.parentNode.classList.add("active");
+                });
+
+            }
+        }
+
+        function flyToStore(currentFeature) {
+            map.flyTo({
+                center: currentFeature.geometry.coordinates,
+                zoom: 15
+            });
+        }
+
+        function createPopUp(currentFeature) {
+            let popUps = document.getElementsByClassName("mapboxgl-popup");
+
+            if (popUps[0]) popUps[0].remove();
+
+            let popup = new mapboxgl.Popup({
+                    closeOnClick: false
+                })
+                .setLngLat(currentFeature.geometry.coordinates)
+                .setHTML("<h3>Mario's</h3>" +
+                    "<h4>" + currentFeature.properties.address + "</h4>")
+                .addTo(map);
+        }</script><script>"serviceWorker"in navigator&&navigator.serviceWorker.register("/service-worker.js").then(function(r){}).catch(function(r){})</script></body></html>
