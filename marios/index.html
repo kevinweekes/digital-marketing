@@ -188,7 +188,11 @@
             style: "mapbox://styles/mapbox/light-v9",
             center: [-61.414084, 10.369671],
             zoom: 9,
-            scrollZoom: false
+            scrollZoom: false,
+            maxBounds: [
+                [-62.09, 9.87],
+                [-60.28, 11.57]
+            ]
         });
 
         let stores = {
@@ -496,6 +500,17 @@
                     type: "geojson",
                     data: stores
                 });
+
+            map.addControl(
+                new mapboxgl.GeolocateControl({
+                    positionOptions: {
+                        enableHighAccuracy: true
+                    },
+                    trackUserLocation: true
+                })
+            );
+
+            map.addControl(new mapboxgl.NavigationControl());
 
 
             buildLocationList(stores);
