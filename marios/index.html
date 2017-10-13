@@ -151,8 +151,8 @@
             cursor: pointer;
             height: 30px;
             width: 30px;
-            background-image: url(pizza-30.png);
-            background-color: rgba(0, 0, 0, 0)
+            /* background-image: (pizza-30.png); */
+            /* background-color: rgba(0, 0, 0, 0) */
         }
         
         .mapboxgl-popup {
@@ -171,7 +171,7 @@
         <div id="listings" class="listings"></div>
     </div>
     <div id="map" class="map pad2">Map</div>
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.js'></script>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.40.1/mapbox-gl.js'></script>
     <script async>
         if (!("remove" in Element.prototype)) {
             Element.prototype.remove = function() {
@@ -187,7 +187,7 @@
             container: "map",
             style: "mapbox://styles/mapbox/light-v9",
             center: [-61.414084, 10.369671],
-            zoom: 9,
+            zoom: 9.2,
             scrollZoom: false,
             maxBounds: [
                 [-62.09, 9.87],
