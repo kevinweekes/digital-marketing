@@ -17,46 +17,63 @@ limitations under the License.
     <meta charset="utf-8">
     <meta name="author" content="Paul Lewis and Surma, Kevin Weekes" />
     <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="theme-color" content="#EA2626">
     <title>Mario's Pizza</title>
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.41.0/mapbox-gl.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.js"></script>
+    <script src="https://npmcdn.com/@turf/turf/turf.min.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.css" rel="stylesheet">
     <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.41.0/mapbox-gl.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="./styles.css" rel="stylesheet">
-    <link rel="stylesheet" href="./map-style.css">
+    <link href="./map-style.css" rel="stylesheet">
+    <link rel="canonical" href="index.html">
+    <link rel="manifest" href="./manifest.json">
 </head>
 
 <body>
     <div class="header">
         <button class="js-menu-show header__menu-toggle material-icons">menu</button>
     </div>
-    <div id="map"> </div>
+    <div id="map" class="js-menu-show"></div>
 
     <aside class="js-side-nav side-nav">
         <nav class="js-side-nav-container side-nav__container">
             <button class="js-menu-hide side-nav__hide material-icons">close</button>
-            <header class="side-nav__header">Stores</header>
+            <header class="side-nav__header">Mario's Pizza</header>
             <ul class="side-nav__content">
-                <li>One</li>
-                <li>Two</li>
-                <li>Three</li>
-                <li>Four</li>
+                <li>Meals</li>
+                <li>Community</li>
+                <li>Teams</li>
+                <li>Exclusive Deals</li>
+                <li>Offline Mode</li>
             </ul>
         </nav>
     </aside>
-    <!-- <main> -->
-    <!-- </main> -->
 
-    <script src='./detabinator.js'></script>
-    <script src='./side-nav.js'></script>
+    <script src=' ./detabinator.js '></script>
+    <script src='./side-nav.js '></script>
     <script>
+        if (!("remove" in Element.prototype)) {
+            Element.prototype.remove = function() {
+                if (this.parentNode) {
+                    this.parentNode.removeChild(this);
+                }
+            };
+        }
+
         mapboxgl.accessToken = "pk.eyJ1IjoiYW5jaWx3ZWVrZXMiLCJhIjoiY2l3a2l0NTkwMDA2OTJ0cDYzZW1uN2ZuciJ9.0iNOPZ_Tybnvn07wiWiTgw";
         let map = new mapboxgl.Map({
             container: "map",
             style: "mapbox://styles/mapbox/navigation-preview-night-v2",
             center: [-61.4, 10.7],
-            //pitch: 90,
-            //bearing: -6.85,
+            maxBounds: [
+                [-62.09, 9.87],
+                [-60.28, 11.57]
+            ],
+            pitch: 90,
+            bearing: 0,
             zoom: 8.2
         });
 
@@ -68,6 +85,22 @@ limitations under the License.
                 clusterMaxZoom: 14,
                 clusterRadius: 50
             });
+
+            map.addControl(
+                new mapboxgl.GeolocateControl({
+                    positionOptions: {
+                        enableHighAccuracy: true
+                    },
+                    trackUserLocation: true
+                }));
+
+            geocoder = new MapboxGeocoder({
+                accessToken: mapboxgl.accessToken,
+                bbox: [-62.09, 9.87, -60.28, 11.57]
+            });
+            map.addControl(geocoder, "top-right");
+
+            map.addControl(new mapboxgl.NavigationControl());
 
             map.addLayer({
                 id: "clusters",
@@ -121,6 +154,45 @@ limitations under the License.
                 }
             });
         });
+
+        function flyToStore(currentSpot) {
+            map.flyToStore({
+                center: currentSpot.geometry.coordinates,
+                zoom: 14
+            });
+        }
+
+        function createPopUp(currentSpot) {
+            let popUps = document.getElementsByClassName("mapboxgl-popup");
+            if (popUps[0]) popUps[0].remove();
+
+            let popup = new mapboxgl.Popup({
+                    closeOnClick: false
+                })
+                .setLngLat(currentSpot.geometry.coordinates)
+                .setHTML(`<h3><a href="tel:"` + currentSpot.properties.phone + `>` + currentSpot.properties.phoneFormatted + `</a></h3>` +
+                    `<h4>` + currentSpot.properties.address + `, ` + currentSpot.properties.city + `</h4>`)
+                .addTo(map);
+        }
+
+        map.on("click", function(e) {
+            let features = map.queryRenderedFeatures(e.point, {
+                layers: ["location"]
+            });
+            if (features.length) {
+                let clickedPoint = features[0];
+
+                flyToStore(clickedPoint);
+                createPopUp(clickedPoint);
+            }
+        })
+    </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener("load", function() {
+                navigator.serviceWorker.register('service-worker.js');
+            });
+        }
     </script>
 </body>
 
