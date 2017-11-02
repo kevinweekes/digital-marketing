@@ -12,35 +12,113 @@ limitations under the License.
 -->
 <!doctype html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta name="author" content="Paul Lewis and Surma" />
-  <meta name="viewport" content="width=device-width,minimum-scale=1">
-  <meta name="theme-color" content="#EA2663">
-  <title>Side Nav</title>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="./styles.css" rel="stylesheet">
-</head>
-<body>
-  <div class="header">
-    <button class="js-menu-show header__menu-toggle material-icons">menu</button>
-  </div>
 
-  <aside class="js-side-nav side-nav">
-    <nav class="js-side-nav-container side-nav__container">
-      <button class="js-menu-hide side-nav__hide material-icons">close</button>
-      <header class="side-nav__header">
-        Side Nav
-      </header>
-      <ul class="side-nav__content">
-        <li>One</li>
-        <li>Two</li>
-        <li>Three</li>
-        <li>Four</li>
-      </ul>
-    </nav>
-  </aside>
-  <script src='./detabinator.js'></script>
-  <script src='./side-nav.js'></script>
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Paul Lewis and Surma, Kevin Weekes" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="theme-color" content="#EA2626">
+    <title>Mario's Map</title>
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.41.0/mapbox-gl.js"></script>
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.41.0/mapbox-gl.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="./styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="header">
+        <button class="js-menu-show header__menu-toggle material-icons">menu</button>
+    </div>
+
+    <aside class="js-side-nav side-nav">
+        <nav class="js-side-nav-container side-nav__container">
+            <button class="js-menu-hide side-nav__hide material-icons">close</button>
+            <header class="side-nav__header">Stores</header>
+            <ul class="side-nav__content">
+                <li>One</li>
+                <li>Two</li>
+                <li>Three</li>
+                <li>Four</li>
+            </ul>
+        </nav>
+    </aside>
+
+    <div id="map"></div>
+    <!-- <script src='./detabinator.js'></script>
+    <script src='./side-nav.js'></script> -->
+    <script>
+        mapboxgl.accessToken = "pk.eyJ1IjoiYW5jaWx3ZWVrZXMiLCJhIjoiY2l3a2l0NTkwMDA2OTJ0cDYzZW1uN2ZuciJ9.0iNOPZ_Tybnvn07wiWiTgw";
+        let map = new mapboxgl.Map({
+            container: "map",
+            style: "mapbox://styles/mapbox/navigation-preview-night-v2",
+            center: [-61.4, 10.7],
+            pitch: 90,
+            bearing: -6.85,
+            zoom: 8.2
+        });
+
+        map.on("load", function() {
+            map.addSource("outlets", {
+                type: "geojson",
+                data: "https://kevinweekes.github.io/digital-marketing/data/map-outlets.geojson",
+                cluster: true,
+                clusterMaxZoom: 14,
+                clusterRadius: 50
+            });
+
+            map.addLayer({
+                id: "clusters",
+                type: "circle",
+                source: "outlets",
+                filter: ["has", "point_count"],
+                paint: {
+                    "circle-color": {
+                        property: "point_count",
+                        type: "interval",
+                        stops: [
+                            [0, "#FFCDD2"],
+                            [4, "#F44336"],
+                            [7, "#D50000"]
+                        ]
+                    },
+                    "circle-radius": {
+                        property: "point_count",
+                        type: "interval",
+                        stops: [
+                            [0, 20],
+                            [4, 30],
+                            [7, 40]
+                        ]
+                    }
+                }
+            });
+
+            map.addLayer({
+                id: "cluster-count",
+                type: "symbol",
+                source: "outlets",
+                filter: ["has", "point_count"],
+                layout: {
+                    "text-field": "{point_count_abbreviated}",
+                    "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+                    "text-size": 12
+                }
+            });
+
+            map.addLayer({
+                id: "unclustered-point",
+                type: "circle",
+                source: "outlets",
+                filter: ["!has", "point_count"],
+                paint: {
+                    "circle-color": "#EEB4Da",
+                    "circle-radius": 4,
+                    "circle-stroke-width": 1,
+                    "circle-stroke-color": "#fff"
+                }
+            });
+        });
+    </script>
 </body>
+
 </html>
