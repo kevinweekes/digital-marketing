@@ -66,7 +66,7 @@ limitations under the License.
         mapboxgl.accessToken = "pk.eyJ1IjoiYW5jaWx3ZWVrZXMiLCJhIjoiY2l3a2l0NTkwMDA2OTJ0cDYzZW1uN2ZuciJ9.0iNOPZ_Tybnvn07wiWiTgw";
         let map = new mapboxgl.Map({
             container: "map",
-            style: "mapbox://styles/mapbox/light-v9",
+            style: "mapbox://styles/mapbox/navigation-preview-night-v2",
             center: [-61.4, 10.7],
             maxBounds: [
                 [-62.09, 9.87],
@@ -79,6 +79,7 @@ limitations under the License.
 
         map.on("load", function() {
             map.addSource("outlets", {
+                id: "locations",
                 type: "geojson",
                 data: "https://kevinweekes.github.io/digital-marketing/data/map-outlets.geojson",
                 cluster: true,
@@ -177,7 +178,7 @@ limitations under the License.
 
         map.on("click", function(e) {
             let features = map.queryRenderedFeatures(e.point, {
-                layers: ["location"]
+                layers: ["locations"]
             });
             if (features.length) {
                 let clickedPoint = features[0];
