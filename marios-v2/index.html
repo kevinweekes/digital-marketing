@@ -63,6 +63,8 @@ limitations under the License.
             };
         }
 
+        let stores = "https://kevinweekes.github.io/digital-marketing/data/map-outlets.geojson";
+
         mapboxgl.accessToken = "pk.eyJ1IjoiYW5jaWx3ZWVrZXMiLCJhIjoiY2l3a2l0NTkwMDA2OTJ0cDYzZW1uN2ZuciJ9.0iNOPZ_Tybnvn07wiWiTgw";
         let map = new mapboxgl.Map({
             container: "map",
@@ -79,12 +81,20 @@ limitations under the License.
 
         map.on("load", function() {
             map.addSource("outlets", {
-                id: "locations",
                 type: "geojson",
-                data: "https://kevinweekes.github.io/digital-marketing/data/map-outlets.geojson",
+                data: stores,
                 cluster: true,
                 clusterMaxZoom: 14,
                 clusterRadius: 50
+            });
+
+            map.addLayer({
+                id: "outlets",
+                type: "symbol",
+                source: "outlets",
+                layout: {
+                    "icon-allow-overlap": true
+                }
             });
 
             map.addControl(
@@ -149,43 +159,25 @@ limitations under the License.
                 filter: ["!has", "point_count"],
                 paint: {
                     "circle-color": "#FF2121",
-                    "circle-radius": 4,
+                    "circle-radius": 8,
                     "circle-stroke-width": 1,
                     "circle-stroke-color": "#fff"
                 }
             });
         });
 
-        function flyToStore(currentSpot) {
-            map.flyToStore({
-                center: currentSpot.geometry.coordinates,
-                zoom: 14
-            });
-        }
-
-        function createPopUp(currentSpot) {
-            let popUps = document.getElementsByClassName("mapboxgl-popup");
-            if (popUps[0]) popUps[0].remove();
-
-            let popup = new mapboxgl.Popup({
+        map.on("click", "unclustered-point", function(e) {
+            new mapboxgl.Popup({
                     closeOnClick: false
                 })
-                .setLngLat(currentSpot.geometry.coordinates)
-                .setHTML(`<h3><a href="tel:"` + currentSpot.properties.phone + `>` + currentSpot.properties.phoneFormatted + `</a></h3>` +
-                    `<h4>` + currentSpot.properties.address + `, ` + currentSpot.properties.city + `</h4>`)
+                .setLngLat(e.features[0].geometry.coordinates)
+                .setHTML(`<h3><a href="tel:${e.features[0].properties.phone}">${e.features[0].properties.phoneFormatted}</a></h3>` +
+                    `<h4>${e.features[0].properties.address}<br>${e.features[0].properties.city}</h4>`)
                 .addTo(map);
-        }
-
-        map.on("click", function(e) {
-            let features = map.queryRenderedFeatures(e.point, {
-                layers: ["locations"]
+            map.flyToStore({
+                center: e.features[0].geometry.coordinates,
+                zoom: 15
             });
-            if (features.length) {
-                let clickedPoint = features[0];
-
-                flyToStore(clickedPoint);
-                createPopUp(clickedPoint);
-            }
         })
     </script>
     <script>
