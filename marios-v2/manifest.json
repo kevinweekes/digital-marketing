@@ -4,7 +4,7 @@
     "theme_color": "#EA2626",
     "background_color": "#EA2626",
     "display": "standalone",
-    "scope": "/",
+    "scope": "/digital-marketing/marios-v2/",
     "start_url": "./?utm_source=web_app_manifest",
     "icons": [{
             "src": "img/icon-72x72.png",
