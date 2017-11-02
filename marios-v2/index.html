@@ -11,14 +11,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <!doctype html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <meta name="author" content="Paul Lewis and Surma, Kevin Weekes" />
     <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="theme-color" content="#EA2626">
     <title>Mario's Pizza</title>
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.41.0/mapbox-gl.js"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.js"></script>
@@ -28,8 +26,13 @@ limitations under the License.
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="./styles.css" rel="stylesheet">
     <link href="./map-style.css" rel="stylesheet">
-    <link rel="canonical" href="index.html">
-    <link rel="manifest" href="./manifest.json">
+    <link href="/manifest.json" rel="manifest">
+    <link rel="icon" href="img/icon-192x192.png" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="192x192" href="img/icon-192x192.png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Mario's Pizza">
+    <meta name="theme-color" content="#EA2626">
+    <link href="index.html" rel="canonical">
 </head>
 
 <body>
@@ -74,7 +77,7 @@ limitations under the License.
                 [-62.09, 9.87],
                 [-60.28, 11.57]
             ],
-            pitch: 90,
+            pitch: 50,
             bearing: 0,
             zoom: 8.2
         });

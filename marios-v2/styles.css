@@ -81,7 +81,8 @@ body {
 .side-nav__container {
     position: relative;
     width: 90%;
-    max-width: 400px;
+    max-width: 90vw;
+    max-height: 100vh;
     background: #FFF;
     height: 100%;
     box-shadow: 2px 0 12px rgba(0, 0, 0, 0.4);
