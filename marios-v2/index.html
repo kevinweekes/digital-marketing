@@ -18,17 +18,19 @@ limitations under the License.
     <meta name="author" content="Paul Lewis and Surma, Kevin Weekes" />
     <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no">
     <meta name="theme-color" content="#EA2626">
-    <title>Mario's Map</title>
+    <title>Mario's Pizza</title>
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.41.0/mapbox-gl.js"></script>
     <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.41.0/mapbox-gl.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="./styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="./map-style.css">
 </head>
 
 <body>
     <div class="header">
         <button class="js-menu-show header__menu-toggle material-icons">menu</button>
     </div>
+    <div id="map"> </div>
 
     <aside class="js-side-nav side-nav">
         <nav class="js-side-nav-container side-nav__container">
@@ -42,18 +44,19 @@ limitations under the License.
             </ul>
         </nav>
     </aside>
+    <!-- <main> -->
+    <!-- </main> -->
 
-    <div id="map"></div>
-    <!-- <script src='./detabinator.js'></script>
-    <script src='./side-nav.js'></script> -->
+    <script src='./detabinator.js'></script>
+    <script src='./side-nav.js'></script>
     <script>
         mapboxgl.accessToken = "pk.eyJ1IjoiYW5jaWx3ZWVrZXMiLCJhIjoiY2l3a2l0NTkwMDA2OTJ0cDYzZW1uN2ZuciJ9.0iNOPZ_Tybnvn07wiWiTgw";
         let map = new mapboxgl.Map({
             container: "map",
             style: "mapbox://styles/mapbox/navigation-preview-night-v2",
             center: [-61.4, 10.7],
-            pitch: 90,
-            bearing: -6.85,
+            //pitch: 90,
+            //bearing: -6.85,
             zoom: 8.2
         });
 
@@ -76,9 +79,9 @@ limitations under the License.
                         property: "point_count",
                         type: "interval",
                         stops: [
-                            [0, "#FFCDD2"],
-                            [4, "#F44336"],
-                            [7, "#D50000"]
+                            [0, "#FF2121"],
+                            [4, "#FF9800"],
+                            [7, "#FFC107"]
                         ]
                     },
                     "circle-radius": {
@@ -111,7 +114,7 @@ limitations under the License.
                 source: "outlets",
                 filter: ["!has", "point_count"],
                 paint: {
-                    "circle-color": "#EEB4Da",
+                    "circle-color": "#FF2121",
                     "circle-radius": 4,
                     "circle-stroke-width": 1,
                     "circle-stroke-color": "#fff"
